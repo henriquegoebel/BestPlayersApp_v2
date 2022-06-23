@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#ddd"
+    android:padding="15dp"
+    android:id="@+id/llFundoLista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvNomeCamiseta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_nome_camiseta"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:id="@+id/tvNumeroCamiseta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_numero_camiseta"
+            android:textSize="25dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BestPlayers</string>
+    <string name="titulo_cadastro">Player Registration:</string>
+    <string name="hint_nome_completo">Full name...</string>
+    <string name="hint_nome_camiseta">Shirt name...</string>
+    <string name="hint_numero_camiseta">Shirt number...</string>
+    <string name="tv_preferencia_pe">Choose your foot preference:</string>
+    <string name="rb_canhoto">Left</string>
+    <string name="rb_destro">Right</string>
+    <string name="rb_ambidestro">Both</string>
+    <string name="tv_posicao_jogador">Playing position:</string>
+    <string name="cb_goleiro">Goalkeeper</string>
+    <string name="cb_zagueiro">Defender</string>
+    <string name="cb_lateral">Side Defender</string>
+    <string name="cb_meia">Midfielder</string>
+    <string name="cb_atacante">Forward</string>
+    <string name="btn_salvar">Save</string>
+
+    <string name="tv_grupo_jogadores">Squad Information:</string>
+    <string name="btn_adicionar">Add Player</string>
+
+    <string name="list_nome_camiseta">Shirt Name</string>
+    <string name="list_numero_camiseta">Shirt Number</string>
+
+    <string name="txt_excluir_atencao">Warning</string>
+    <string name="txt_excluir_message">Your are deleting</string>
+    <string name="txt_excluir_cancelar">Cancel</string>
+    <string name="txt_excluir_confirmar">Confirm</string>
+
+
+
+</resources>

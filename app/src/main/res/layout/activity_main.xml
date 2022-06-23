@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000FF"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:background="#0077FF">
+
+        <TextView
+            android:id="@+id/tvCadastroJogador"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/titulo_cadastro"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/etNomeCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/hint_nome_completo"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/etNomeCamiseta"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/hint_nome_camiseta"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etNumeroCamiseta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/hint_numero_camiseta"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tvPe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:text="@string/tv_preferencia_pe"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/rgPe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/rbVazio">
+
+            <RadioButton
+                android:id="@+id/rbCanhoto"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:text="@string/rb_canhoto" />
+
+            <RadioButton
+                android:id="@+id/rbDestro"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/rb_destro" />
+
+            <RadioButton
+                android:id="@+id/rbAmbidestro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_ambidestro" />
+
+            <RadioButton
+                android:id="@+id/rbVazio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vazio"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvPosicao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:text="@string/tv_posicao_jogador"
+            android:textSize="16sp"/>
+
+        <CheckBox
+            android:id="@+id/cbGoleiro"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/cb_goleiro" />
+
+        <CheckBox
+            android:id="@+id/cbLateral"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/cb_lateral" />
+
+        <CheckBox
+            android:id="@+id/cbZagueiro"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/cb_zagueiro" />
+
+        <CheckBox
+            android:id="@+id/cbMeia"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/cb_meia" />
+
+        <CheckBox
+            android:id="@+id/cbAtacante"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/cb_atacante" />
+
+        <Button
+            android:id="@+id/btSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_salvar" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
