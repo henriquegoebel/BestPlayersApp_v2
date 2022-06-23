@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BestPlayers</string>
-    <string name="titulo_cadastro">Player Registration:</string>
+    <string name="titulo_cadastro">Registro de Jogador:</string>
     <string name="hint_nome_completo">Nome completo...</string>
     <string name="hint_nome_camiseta">Nome na camiseta...</string>
     <string name="hint_numero_camiseta">Número da camiseta...</string>

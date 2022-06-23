@@ -34,7 +34,7 @@
             android:layout_height="46dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Digite o e-mail..."
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:layout_gravity="center_horizontal"/>
 
@@ -46,7 +46,7 @@
             android:layout_height="46dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Senha...(mínimo de 6 caracteres)"
+            android:hint="Senha"
             android:inputType="textPassword"
             android:layout_gravity="center_horizontal"/>
 
