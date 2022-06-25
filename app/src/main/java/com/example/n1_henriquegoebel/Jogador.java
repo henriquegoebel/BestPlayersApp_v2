@@ -7,6 +7,7 @@ public class Jogador {
     public String nomeCompleto, nomeCamiseta, pePreferencial;
     public String goleiro, lateral, zagueiro, meia, atacante;
     public String idUsuario;
+    public String titular;
 
     public Jogador() {
     }
@@ -50,6 +51,30 @@ public class Jogador {
         this.zagueiro = zagueiro;
         this.meia = meia;
         this.atacante = atacante;
+    }
+
+    public Jogador(String id, String numeroCamiseta, String nomeCompleto, String nomeCamiseta, String pePreferencial,
+                   String goleiro, String lateral, String zagueiro, String meia, String atacante, String idUsuario, String titular) {
+        this.id = id;
+        this.numeroCamiseta = numeroCamiseta;
+        this.nomeCompleto = nomeCompleto;
+        this.nomeCamiseta = nomeCamiseta;
+        this.pePreferencial = pePreferencial;
+        this.goleiro = goleiro;
+        this.lateral = lateral;
+        this.zagueiro = zagueiro;
+        this.meia = meia;
+        this.atacante = atacante;
+        this.idUsuario = idUsuario;
+        this.titular = titular;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
     }
 
     public String toString(){

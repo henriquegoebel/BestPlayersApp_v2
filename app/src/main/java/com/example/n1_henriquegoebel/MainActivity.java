@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btSalvar;
     private String acao;
     private Jogador jogador;
+    private CheckBox cbTitular;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         cbMeia = findViewById(R.id.cbMeia);
         cbAtacante = findViewById(R.id.cbAtacante);
         btSalvar = findViewById(R.id.btSalvar);
+        cbTitular = findViewById(R.id.cbTitular);
 
         rbVazio = findViewById(R.id.rbVazio);
         rbVazio.setVisibility(View.INVISIBLE);
@@ -72,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
             etNomeCompleto.setText(jogador.nomeCompleto);
             etNomeCamiseta.setText(getIntent().getExtras().getString("nomeCamiseta"));
             etNumeroCamiseta.setText(getIntent().getExtras().getString("numeroCamiseta"));
+
+            jogador.setTitular(getIntent().getExtras().getString("titular"));
+            if(jogador.titular.equals("1")){
+                cbTitular.setChecked(true);
+            }
 
             jogador.setPePreferencial(getIntent().getExtras().getString("pePreferencial"));
 
@@ -192,6 +199,12 @@ public class MainActivity extends AppCompatActivity {
             jogador.nomeCamiseta = etNomeCamiseta.getText().toString();
             jogador.numeroCamiseta = etNumeroCamiseta.getText().toString();
             jogador.setIdUsuario(auth.getCurrentUser().getUid());
+
+            if(cbTitular.isChecked()){
+                jogador.titular = "1";
+            }else{
+                jogador.titular = "0";
+            }
 
 
             int radioButtonId = rgPe.getCheckedRadioButtonId();

@@ -51,6 +51,14 @@
             android:hint="@string/hint_numero_camiseta"
             android:inputType="numberDecimal" />
 
+        <CheckBox
+            android:id="@+id/cbTitular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:text="Titular" />
+
         <TextView
             android:id="@+id/tvPe"
             android:layout_width="match_parent"

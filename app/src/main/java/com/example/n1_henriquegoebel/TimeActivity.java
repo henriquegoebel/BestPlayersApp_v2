@@ -2,20 +2,16 @@ package com.example.n1_henriquegoebel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -28,12 +24,14 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaListaJogadores extends AppCompatActivity {
+public class TimeActivity extends AppCompatActivity {
 
-    private ListView lvJogadores;
+    private ListView lvTime;
+    private Button btnAdicionarJogador;
+
     //private AdapterJogadores adapter;
     private ArrayAdapter adapter;
-    private List<Jogador> listaJogadores;
+    private List<Jogador> listaJogadoresTime = new ArrayList<>();
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
@@ -46,22 +44,22 @@ public class TelaListaJogadores extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_lista_jogadores);
+        setContentView(R.layout.activity_time);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference();
 
-        listaJogadores = new ArrayList<Jogador>();
-        lvJogadores = findViewById(R.id.lvJogadores);
-        //carregarJogadores();
-        configurarListView();
+        //listaJogadoresTime = new ArrayList<Jogador>();
+        lvTime = findViewById(R.id.lvTime);
 
-        Button btnAdicionar = findViewById(R.id.btnAdicionar);
-        btnAdicionar.setOnClickListener(new View.OnClickListener() {
+        //configurarListView();
+
+        btnAdicionarJogador = findViewById(R.id.btnAdicionarJogador);
+        btnAdicionarJogador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaListaJogadores.this, MainActivity.class);
-                intent.putExtra("acao", "novo");
+                Intent intent = new Intent(TimeActivity.this, TelaListaJogadores.class);
+                intent.putExtra("acao", "adicionar");
                 startActivity(intent);
             }
         });
@@ -77,12 +75,13 @@ public class TelaListaJogadores extends AppCompatActivity {
         };
         auth.addAuthStateListener( authStateListener );
     }
+
     protected void onStart() {
         super.onStart();
         carregarJogadores();
-        listaJogadores.clear();
+        listaJogadoresTime.clear();
 
-        query = reference.child("jogadores");//.orderByChild("nomeCompleto");
+        query = reference.child("jogadores").orderByChild("titular").equalTo("1");
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -103,7 +102,7 @@ public class TelaListaJogadores extends AppCompatActivity {
                         jogador.setAtacante(snapshot.child("atacante").getValue(String.class));
                         jogador.setTitular(snapshot.child("titular").getValue(String.class));
 
-                        listaJogadores.add(jogador);
+                        listaJogadoresTime.add(jogador);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -113,11 +112,12 @@ public class TelaListaJogadores extends AppCompatActivity {
 
             }
 
+
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String idJogadores = snapshot.getKey();
 
-                for (Jogador j : listaJogadores) {
+                for (Jogador j : listaJogadoresTime) {
                     if (j.getId().equals(snapshot.getKey())) {
                         j.setNomeCompleto(snapshot.child("nomeCompleto").getValue(String.class));
                         j.setNomeCamiseta(snapshot.child("nomeCamiseta").getValue(String.class));
@@ -140,9 +140,9 @@ public class TelaListaJogadores extends AppCompatActivity {
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 String idJogadores = snapshot.getKey();
 
-                for (Jogador j : listaJogadores) {
+                for (Jogador j : listaJogadoresTime) {
                     if (j.getId().equals(idJogadores)) {
-                        listaJogadores.remove(j);
+                        listaJogadoresTime.remove(j);
                         break;
 
                     }
@@ -168,59 +168,6 @@ public class TelaListaJogadores extends AppCompatActivity {
         query.removeEventListener( childEventListener );
     }
 
-    private void configurarListView(){
-
-        lvJogadores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Jogador jogadorSelecionado = listaJogadores.get(position);
-                Intent intent = new Intent(TelaListaJogadores.this, MainActivity.class);
-                intent.putExtra("acao", "editar");
-                intent.putExtra("idJogador", jogadorSelecionado.getId());
-                intent.putExtra("nomeCompleto", jogadorSelecionado.getNomeCompleto());
-                intent.putExtra("nomeCamiseta", jogadorSelecionado.getNomeCamiseta());
-                intent.putExtra("numeroCamiseta", jogadorSelecionado.getNumeroCamiseta());
-                intent.putExtra("pePreferencial", jogadorSelecionado.getPePreferencial());
-                intent.putExtra("goleiro", jogadorSelecionado.getGoleiro());
-                intent.putExtra("zagueiro", jogadorSelecionado.getZagueiro());
-                intent.putExtra("lateral", jogadorSelecionado.getLateral());
-                intent.putExtra("meia", jogadorSelecionado.getMeia());
-                intent.putExtra("atacante", jogadorSelecionado.getAtacante());
-                intent.putExtra("titular", jogadorSelecionado.getTitular());
-
-                startActivity(intent);
-            }
-        });
-
-        lvJogadores.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Jogador jogadorSelecionado = listaJogadores.get(position);
-                excluirJogador(jogadorSelecionado);
-                return true;
-            }
-        });
-
-    }
-
-
-    private void excluirJogador(Jogador jogador){
-        AlertDialog.Builder alerta = new AlertDialog.Builder(this);
-        alerta.setIcon(android.R.drawable.ic_input_delete);
-        alerta.setTitle(getString(R.string.txt_excluir_atencao));
-        alerta.setMessage(getString(R.string.txt_excluir_message) + " " + jogador.nomeCamiseta);
-        alerta.setNeutralButton(getString(R.string.txt_excluir_cancelar), null);
-        alerta.setPositiveButton(getString(R.string.txt_excluir_confirmar), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //JogadorDAO.excluir(TelaListaJogadores.this, jogador.id);
-                reference.child("jogadores").child( jogador.getId() ).removeValue();
-                //carregarJogadores();
-            }
-        });
-        alerta.show();
-    }
-
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -233,24 +180,12 @@ public class TelaListaJogadores extends AppCompatActivity {
     }
 
     private void carregarJogadores(){
-       //listaJogadores = JogadorDAO.getJogadores(this);
-        /*if (listaJogadores.size() == 0){
-            Jogador fake = new Jogador("", "Lista Vazia ");
-            listaJogadores.add( fake );
-            lvJogadores.setEnabled(false);
-        }else{
-            //adapter = new AdapterJogadores(this,listaJogadores);
-            //lvJogadores.setAdapter(adapter);
-            adapter = new AdapterJogadores(this,android.R.layout.simple_list_item_1, listaJogadores);
-            lvJogadores.setAdapter(adapter);
-        }*/
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, listaJogadores);
-        lvJogadores.setAdapter(adapter);
-
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, listaJogadoresTime);
+        lvTime.setAdapter(adapter);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_formulario, menu);
         return true;
     }
 
@@ -258,14 +193,12 @@ public class TelaListaJogadores extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menuSair){
             auth.signOut();
-        }else if (id == R.id.menuTime){
-            Intent intent = new Intent(TelaListaJogadores.this, TimeActivity.class);
-            intent.putExtra("acao", "time");
+        }else if (id == R.id.menuVoltarLista){
+            Intent intent = new Intent(TimeActivity.this, TelaListaJogadores.class);
+            intent.putExtra("acao", "voltar");
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
 
     }
-
-
 }

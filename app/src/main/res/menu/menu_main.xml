@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.pro.adalto.applista.MainActivity">
 
+    <item
+        android:id="@+id/menuTime"
+        android:orderInCategory="100"
+        android:title="Meu Time"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menuSair"

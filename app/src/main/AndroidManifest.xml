@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.N1_HenriqueGoebel">
         <activity
+            android:name=".TimeActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
@@ -26,8 +29,7 @@
             android:exported="true" />
         <activity
             android:name=".TelaListaJogadores"
-            android:exported="true"/>
-
+            android:exported="true" />
     </application>
 
 </manifest>
